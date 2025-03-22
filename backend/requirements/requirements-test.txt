@@ -1,0 +1,3 @@
+kagglehub==0.3.10
+kaggle==1.7.4.2
+tqdm==4.67.1
