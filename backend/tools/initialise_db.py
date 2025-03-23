@@ -4,7 +4,6 @@ import io
 import itertools
 import logging
 import sys
-
 import zipfile
 from collections import defaultdict
 from typing import Optional
