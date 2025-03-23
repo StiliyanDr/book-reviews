@@ -3,6 +3,8 @@ import os
 from dataclasses import dataclass
 from typing import Optional
 
+from cached_property import cached_property
+
 from backend.bookreviews.constants import SecretNames
 from bookreviews.inftrastructure.configuration.mongoconfig import MongoConfig
 from bookreviews.inftrastructure.utils.dirutils import get_backend_root
@@ -47,6 +49,6 @@ class Configuration:
         except FileNotFoundError as e:
             return None
 
-    @property
+    @cached_property
     def secrets_directory(self) -> str:
         return self.__content.get("secrets_directory", "/secrets")
