@@ -1,0 +1,15 @@
+{
+    "mongo": {
+        "protocol": "mongodb",
+        "host": "localhost:27017",
+        "options": {
+            "retryWrites": "true",
+            "w": "majority"
+        },
+        "db_name": "book_reviews",
+        "credentials": {
+            "username": "root",
+            "password": "root"
+        }
+    }
+}
