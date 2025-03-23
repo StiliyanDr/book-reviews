@@ -5,7 +5,7 @@ from typing import Optional
 
 from cached_property import cached_property
 
-from backend.bookreviews.constants import SecretNames
+from bookreviews.constants import SecretNames
 from bookreviews.inftrastructure.configuration.mongoconfig import MongoConfig
 from bookreviews.inftrastructure.utils.dirutils import get_backend_root
 

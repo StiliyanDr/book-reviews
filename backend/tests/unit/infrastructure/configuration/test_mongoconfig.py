@@ -1,4 +1,4 @@
-from backend.bookreviews.inftrastructure.configuration.configuration import Configuration
+from bookreviews.inftrastructure.configuration.configuration import Configuration
 
 
 def test_mongo_config(stub_config: Configuration) -> None:

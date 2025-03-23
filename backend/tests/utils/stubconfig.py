@@ -1,4 +1,4 @@
-from backend.bookreviews.inftrastructure.configuration.configuration import Configuration
+from bookreviews.inftrastructure.configuration.configuration import Configuration
 
 
 def create_stub_config() -> Configuration:

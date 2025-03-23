@@ -1,7 +1,7 @@
 import pytest
 
-from backend.bookreviews.inftrastructure.configuration.configuration import Configuration
-from backend.tests.utils.stubconfig import create_stub_config
+from bookreviews.inftrastructure.configuration.configuration import Configuration
+from tests.utils.stubconfig import create_stub_config
 
 
 @pytest.fixture
