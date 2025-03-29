@@ -5,7 +5,7 @@ from cached_property import cached_property
 from pymongo import AsyncMongoClient
 from pymongo.asynchronous.collection import AsyncCollection
 
-from backend.bookreviews.inftrastructure.configuration.configuration import Configuration
+from bookreviews.inftrastructure.configuration.configuration import Configuration
 
 type ProjectionType = list[str] | dict[str, bool]
 

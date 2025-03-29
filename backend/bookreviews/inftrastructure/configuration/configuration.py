@@ -40,7 +40,7 @@ class Configuration:
                 if creds
                 else None)
 
-    def _read_secret(self, name: str) -> str:
+    def _read_secret(self, name: str) -> Optional[str]:
         path = os.path.join(self.secrets_directory, name)
 
         try:
