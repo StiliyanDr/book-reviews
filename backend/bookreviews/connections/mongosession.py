@@ -41,4 +41,3 @@ class MongoSession:
 
     def _get_collection(self, name: str) -> AsyncCollection:
         return self._client[self.db_name][name]
-

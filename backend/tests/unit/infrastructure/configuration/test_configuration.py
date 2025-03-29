@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from bookreviews.inftrastructure.configuration.configuration import Configuration
 from bookreviews.inftrastructure.configuration.mongoconfig import MongoConfig
@@ -21,7 +21,7 @@ def test_mongo_credentials_when_the_secret_is_missing(read_secret_mock,
     "username": "secret-user",
     "password": "secret-pass",
 })
-def test_mongo_credentials_when_the_secret_available(read_secret_mock,
+def test_mongo_credentials_when_the_secret_available(read_secret_mock: MagicMock,
                                                      stub_config: Configuration) -> None:
     creds = stub_config.mongo_credentials
     assert creds.password == "secret-pass"
