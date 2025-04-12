@@ -15,6 +15,7 @@ def stub_config() -> Configuration:
 @pytest.fixture
 def raw_book() -> RawBook:
     return {
+        "_id": "67faa59180bbeb5c0d143467",
         "Title": "The Catcher in the Rye",
         "description": "A book about a boy",
         "authors": ["J.D. Salinger"],
@@ -29,7 +30,8 @@ def raw_book() -> RawBook:
 
 @pytest.fixture
 def book(raw_book: RawBook) -> Book:
-    return Book(title=raw_book["Title"],
+    return Book(id=raw_book["_id"],
+                title=raw_book["Title"],
                 description=raw_book["description"],
                 authors=raw_book["authors"],
                 image_url=raw_book["image"],

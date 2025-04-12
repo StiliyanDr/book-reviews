@@ -14,6 +14,7 @@ class BooksDTL:
 
     def _parse_book(self, book: dict[str, str | list[str] | None]) -> Book:
         return Book(
+            id=str(book["_id"]),
             title=book["Title"],
             description=book["description"],
             authors=book["authors"] or [],
