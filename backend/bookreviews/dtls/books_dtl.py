@@ -22,5 +22,5 @@ class BooksDTL:
             publisher=book["publisher"],
             published_date=book["publishedDate"],
             categories=book["categories"] or [],
-            ratings_count=book["ratingsCount"],
+            ratings_count=book["ratingsCount"] or 0,
         )
