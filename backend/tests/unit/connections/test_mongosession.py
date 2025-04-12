@@ -29,5 +29,5 @@ class TestMongoSession:
 
         result = await mongo_session.find("books", query, projection)
 
-        collection.find.assert_called_with(query, projection=projection)
+        collection.find.assert_called_with(query, projection=projection, limit=None)
         assert result == [book]

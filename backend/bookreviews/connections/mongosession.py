@@ -35,9 +35,10 @@ class MongoSession:
     async def find(self,
                    collection_name: str,
                    query: dict,
-                   projection: Optional[ProjectionType] = None) -> list[dict]:
+                   projection: Optional[ProjectionType] = None,
+                   limit: Optional[int] = None) -> list[dict]:
         collection = self._get_collection(collection_name)
-        return await collection.find(query, projection=projection).to_list()
+        return await collection.find(query, projection=projection, limit=limit).to_list()
 
     def _get_collection(self, name: str) -> AsyncCollection:
         return self._client[self.db_name][name]
