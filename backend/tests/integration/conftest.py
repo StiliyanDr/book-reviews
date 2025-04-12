@@ -6,7 +6,8 @@ from fastapi.testclient import TestClient
 
 
 @pytest.fixture
-def client(handler: Callable, router: APIRouter) -> TestClient:
+def client(handler: Callable) -> TestClient:
+    router = APIRouter()
     router.add_api_route(handler.PATH, handler.__call__, methods=[handler.METHOD])
     app = FastAPI()
     app.include_router(router)

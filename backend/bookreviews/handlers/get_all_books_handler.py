@@ -8,7 +8,7 @@ from bookreviews.models.book import Book
 
 class GetAllBooksHandler:
     METHOD = HTTPMethods.GET
-    PATH = "/"
+    PATH = "/book"
 
     def __init__(self, books_controller: BooksController, config: Configuration) -> None:
         self._books_controller = books_controller

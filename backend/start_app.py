@@ -6,9 +6,8 @@ from bookreviews.inftrastructure.environment import Environment
 
 def setup_app(env: Environment) -> FastAPI:
     app = FastAPI()
-
-    for router in env.create_routes():
-        app.include_router(router)
+    router = env.create_routes()
+    app.include_router(router)
 
     return app
 

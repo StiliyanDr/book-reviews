@@ -4,7 +4,7 @@ import pytest
 
 from bookreviews.constants import HTTPMethods
 from bookreviews.controllers.books_controller import BooksController
-from bookreviews.handlers.books.get_all_books_handler import GetAllBooksHandler
+from bookreviews.handlers.get_all_books_handler import GetAllBooksHandler
 from bookreviews.inftrastructure.configuration.configuration import Configuration
 from bookreviews.models.book import Book
 
@@ -14,7 +14,7 @@ class TestGetAllBooksHandler:
         assert GetAllBooksHandler.METHOD == HTTPMethods.GET
 
     def test_path(self) -> None:
-        assert GetAllBooksHandler.PATH == "/"
+        assert GetAllBooksHandler.PATH == "/book"
 
     @pytest.mark.asyncio
     async def test_exceptions_propagate(self, stub_config: Configuration) -> None:
