@@ -19,7 +19,7 @@ class TestMongoSession:
 
     @pytest.mark.asyncio
     @patch.object(MongoSession, "_get_collection")
-    async def test_find(self, get_collection_mock: MagicMock, mongo_session: MongoSession) -> None:
+    async def test_find_with_all_arguments(self, get_collection_mock: MagicMock, mongo_session: MongoSession) -> None:
         book = {"title": "The Catcher in the Rye", "summary": "..."}
         cursor = MagicMock(to_list=AsyncMock(return_value=[book]))
         collection = MagicMock(find=MagicMock(return_value=cursor))
@@ -30,4 +30,16 @@ class TestMongoSession:
         result = await mongo_session.find("books", query, projection)
 
         collection.find.assert_called_with(query, projection=projection, limit=None)
+        assert result == [book]
+
+    @pytest.mark.asyncio
+    @patch.object(MongoSession, "_get_collection")
+    async def test_find_with_defaults(self, get_collection_mock: MagicMock, mongo_session: MongoSession) -> None:
+        book = {"title": "The Catcher in the Rye", "summary": "..."}
+        cursor = MagicMock(to_list=AsyncMock(return_value=[book]))
+        collection = MagicMock(find=MagicMock(return_value=cursor))
+        get_collection_mock.return_value = collection
+        result = await mongo_session.find("books")
+
+        collection.find.assert_called_with({}, projection=None, limit=None)
         assert result == [book]
