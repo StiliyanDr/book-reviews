@@ -60,8 +60,11 @@ def load_book_data(data_archive: zipfile.ZipFile,
                     break
 
                 record = parse_record(raw_record, list_fields=["authors", "categories"])
-                books.append(record)
-                titles.add(record["Title"])
+                title = record["Title"]
+
+                if title is not None:        
+                   books.append(record)
+                   titles.add(title)
 
         return books, titles
 
@@ -125,10 +128,13 @@ def parse_list_value(list_value: str | None) -> list[str] | None:
 
 def init_db_with(books: list[DataRecord],
                  reviews: list[DataRecord],
-                 connection_string: str) -> None:
+                 connection_string: str,
+                 connection_timout: int) -> None:
     log.info(f"Initialising database {DB_NAME}...")
 
-    with MongoClient(connection_string) as client:
+    with MongoClient(connection_string,
+                     timeoutMS=connection_timout,
+                     connectTimeoutMS=connection_timout) as client:
         if DB_NAME in client.list_database_names():
             log.info(f"Database {DB_NAME} already exists. Dropping it...")
             client.drop_database(DB_NAME)
@@ -156,8 +162,12 @@ if __name__ == "__main__":
                         type=str,
                         default="mongodb://localhost:27017",
                         help="Connection string for the MongoDB database.")
+    parser.add_argument("--connection-timeout",
+                        type=int,
+                        default=90000,
+                        help="Connection timout (in milliseconds) for the MongoDB database.")
 
     args = parser.parse_args()
 
     books, reviews = load_data(args.data_path, args.max_books, args.max_reviews_per_book)
-    init_db_with(books, reviews, args.connection_string)
+    init_db_with(books, reviews, args.connection_string, args.connection_timeout)
