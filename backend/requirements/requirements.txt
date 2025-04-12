@@ -1,3 +1,4 @@
 pymongo==4.11.3
 fastapi[standard]==0.115.11
 cached-property==2.0.1
+uvicorn==0.23.2
