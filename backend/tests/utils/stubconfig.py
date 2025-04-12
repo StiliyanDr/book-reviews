@@ -16,5 +16,8 @@ def create_stub_config() -> Configuration:
                 "password": "testpass",
             },
             "secrets_directory": "/secrets",
+            "books_limit": 100,
+            "port": 8080,
+            "landscape": "qa",
         }
     })

@@ -21,11 +21,16 @@ class Configuration:
         self.__content = content
 
     @classmethod
-    def load(path: Optional[str] = None) -> "Configuration":
-        path = path or os.path.join(get_backend_root(), "config.json")
+    def load(cls, path: Optional[str] = None) -> "Configuration":
+        path = path or cls._get_config_path()
 
         with open(path, encoding="utf-8") as file:
             return Configuration(json.load(file))
+
+    @staticmethod
+    def _get_config_path() -> str:
+        default_path = os.path.join(get_backend_root(), "config.json")
+        return os.getenv("CONFIG_PATH", default_path)
 
     @property
     def mongo(self) -> MongoConfig:
@@ -49,6 +54,18 @@ class Configuration:
         except FileNotFoundError as e:
             return None
 
-    @cached_property
+    @property
     def secrets_directory(self) -> str:
         return self.__content.get("secrets_directory", "/secrets")
+
+    @property
+    def books_limit(self) -> Optional[int]:
+        return self.__content.get("books_limit")
+
+    @property
+    def port(self) -> int:
+        return self.__content["port"]
+
+    @property
+    def landscape(self) -> str:
+        return self.__content["landscape"]
