@@ -4,6 +4,8 @@ from bookreviews.inftrastructure.configuration.configuration import Configuratio
 from bookreviews.models.book import Book
 from tests.utils.stubconfig import create_stub_config
 
+type RawBook = dict[str, str | list[str] | None]
+
 
 @pytest.fixture
 def stub_config() -> Configuration:
@@ -11,7 +13,7 @@ def stub_config() -> Configuration:
 
 
 @pytest.fixture
-def raw_book() -> dict[str, str | list[str] | None]:
+def raw_book() -> RawBook:
     return {
         "Title": "The Catcher in the Rye",
         "description": "A book about a boy",
@@ -26,7 +28,7 @@ def raw_book() -> dict[str, str | list[str] | None]:
 
 
 @pytest.fixture
-def book(raw_book: dict[str, str | list[str] | None]) -> Book:
+def book(raw_book: RawBook) -> Book:
     return Book(title=raw_book["Title"],
                 description=raw_book["description"],
                 authors=raw_book["authors"],

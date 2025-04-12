@@ -5,6 +5,7 @@ import pytest
 from backend.bookreviews.connections.mongosession import MongoSession
 from backend.bookreviews.dtls.books_dtl import BooksDTL
 from backend.bookreviews.models.book import Book
+from tests.conftest import RawBook
 
 
 class TestGetAll:
@@ -20,7 +21,7 @@ class TestGetAll:
         session.find.assert_called_with("books", limit=None)
 
     @pytest.mark.asyncio
-    async def test_book_objects_are_returned(self, raw_book, book) -> None:
+    async def test_book_objects_are_returned(self, raw_book: RawBook, book: Book) -> None:
         session = create_autospec(MongoSession)
         dtl = BooksDTL(session)
         session.find.return_value = [raw_book]

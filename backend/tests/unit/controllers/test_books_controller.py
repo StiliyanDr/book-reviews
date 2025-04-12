@@ -4,6 +4,7 @@ import pytest
 
 from bookreviews.controllers.books_controller import BooksController
 from bookreviews.dtls.books_dtl import BooksDTL
+from bookreviews.models.book import Book
 
 
 class TestGetAll:
@@ -19,7 +20,7 @@ class TestGetAll:
         dtl.get_all.assert_called_with(limit=None)
 
     @pytest.mark.asyncio
-    async def test_book_objects_are_returned(self, book) -> None:
+    async def test_book_objects_are_returned(self, book: Book) -> None:
         dtl = create_autospec(BooksDTL)
         dtl.get_all.return_value = [book]
         controller = BooksController(dtl)
