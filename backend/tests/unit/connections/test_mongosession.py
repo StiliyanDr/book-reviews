@@ -27,9 +27,9 @@ class TestMongoSession:
         query = {"title": "The Catcher in the Rye"}
         projection = {"title": 1, "author": 0}
 
-        result = await mongo_session.find("books", query, projection)
+        result = await mongo_session.find("books", query, projection, limit=199)
 
-        collection.find.assert_called_with(query, projection=projection, limit=None)
+        collection.find.assert_called_with(query, projection=projection, limit=199)
         assert result == [book]
 
     @pytest.mark.asyncio
@@ -41,5 +41,5 @@ class TestMongoSession:
         get_collection_mock.return_value = collection
         result = await mongo_session.find("books")
 
-        collection.find.assert_called_with({}, projection=None, limit=None)
+        collection.find.assert_called_with({}, projection=None, limit=0)
         assert result == [book]

@@ -38,6 +38,7 @@ class MongoSession:
                    projection: Optional[ProjectionType] = None,
                    limit: Optional[int] = None) -> list[dict]:
         query = query or {}
+        limit = limit or 0
         collection = self._get_collection(collection_name)
         return await collection.find(query, projection=projection, limit=limit).to_list()
 
