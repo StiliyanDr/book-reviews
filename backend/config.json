@@ -1,4 +1,7 @@
 {
+    "landscape": "dev",
+    "port": 8080,
+    "books_limit": 100,
     "mongo": {
         "protocol": "mongodb",
         "host": "localhost:27017",
