@@ -1,5 +1,6 @@
 import argparse
 import csv
+import datetime as dt
 import io
 import itertools
 import logging
@@ -9,6 +10,7 @@ from collections import defaultdict
 from typing import Optional
 
 from pymongo import MongoClient
+from pymongo.collection import Collection
 from tqdm import tqdm
 
 type RecordValue = str | list[str] | None
@@ -37,7 +39,7 @@ def load_data(
     data_path: str,
     max_books: int,
     max_reviews_per_book: int,
-) -> tuple[list[DataRecord], list[DataRecord]]:
+) -> tuple[list[DataRecord], dict[str, list[DataRecord]]]:
     with zipfile.ZipFile(data_path, "r") as data_archive:
         books, titles = load_book_data(data_archive, max_books)
         reviews = load_review_data(data_archive, titles, max_reviews_per_book)
@@ -72,7 +74,7 @@ def load_book_data(data_archive: zipfile.ZipFile,
 
 def load_review_data(data_archive: zipfile.ZipFile,
                      book_titles: set[str],
-                     max_reviews_per_book: int) -> list[DataRecord]:
+                     max_reviews_per_book: int) -> dict[str, list[DataRecord]]:
     with data_archive.open("Books_rating.csv", "r") as binary_file:
         with io.TextIOWrapper(binary_file, encoding="utf-8") as file:
             reviews = defaultdict(list)
@@ -81,19 +83,37 @@ def load_review_data(data_archive: zipfile.ZipFile,
                      f"{max_reviews_per_book} reviews per book)...")
 
             for raw_record in csv_reader:
-                record = parse_record(raw_record)
+                record = parse_review(raw_record)
                 title = record["Title"]
 
                 if title in book_titles and len(reviews[title]) < max_reviews_per_book:
                     reviews[title].append(record)
 
-            return list(itertools.chain.from_iterable(reviews.values()))
+            return reviews
 
 
 def parse_record(raw_record: DataRecord, list_fields: Optional[list[str]] = None) -> DataRecord:
     list_fields = list_fields or []
     raw_record = with_none_for_missing_values(raw_record)
     return with_parsed_list_values(raw_record, list_fields)
+
+
+def parse_review(raw_record: DataRecord) -> DataRecord:
+    record = parse_record(raw_record)
+
+    for field in ["Id", "Price", "User_id"]:
+        record.pop(field)
+
+    for field in ["helpfulness", "score", "time", "text", "summary"]:
+        record[field] = record.pop(f"review/{field}")
+
+    score = record["score"]
+    record["score"] = float(score) if score is not None else None
+    time_in_seconds_since_epoch = record["time"]
+    record["time"] = (dt.datetime.fromtimestamp(int(time_in_seconds_since_epoch), dt.UTC)
+                      if time_in_seconds_since_epoch is not None
+                      else None)
+    return record
 
 
 def with_none_for_missing_values(record: DataRecord) -> DataRecord:
@@ -127,7 +147,7 @@ def parse_list_value(list_value: str | None) -> list[str] | None:
 
 
 def init_db_with(books: list[DataRecord],
-                 reviews: list[DataRecord],
+                 reviews_per_title: dict[str, list[DataRecord]],
                  connection_string: str,
                  connection_timout: int) -> None:
     log.info(f"Initialising database {DB_NAME}...")
@@ -143,9 +163,20 @@ def init_db_with(books: list[DataRecord],
 
         books_collection = db[BOOKS_COLLECTION]
         books_collection.insert_many(books)
+        insert_reviews(reviews_per_title, db[REVIEWS_COLLECTION], books_collection)
 
-        reviews_collection = db[REVIEWS_COLLECTION]
-        reviews_collection.insert_many(reviews)
+
+def insert_reviews(reviews_per_title: dict[str, list[DataRecord]],
+                   reviews_collection: Collection,
+                   books_collection: Collection) -> None:
+    for title, reviews in reviews_per_title.items():
+        book_id = books_collection.find_one({"Title": title})["_id"]
+
+        for review in reviews:
+            review["bookID"] = book_id
+
+    all_reviews = list(itertools.chain.from_iterable(reviews_per_title.values()))
+    reviews_collection.insert_many(all_reviews)
 
 
 if __name__ == "__main__":
