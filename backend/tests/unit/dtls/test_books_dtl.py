@@ -28,6 +28,5 @@ class TestGetAll:
         result = await dtl.get_all()
 
         assert isinstance(result, list)
-        assert len(result) == 1
-        assert result[0] == book
+        assert result == [book]
         session.find.assert_called_with("books", limit=None)

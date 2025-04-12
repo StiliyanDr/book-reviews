@@ -27,6 +27,5 @@ class TestGetAll:
         result = await controller.get_all()
 
         assert isinstance(result, list)
-        assert len(result) == 1
-        assert result[0] == book
+        assert result == [book]
         dtl.get_all.assert_called_with(limit=None)
