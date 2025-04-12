@@ -2,13 +2,13 @@
 A web application displaying books and their reviews on Amazon
 
 ## Tech stack
-- DB
-  MongoDB
-- Backend
+- DB  
+  MongoDB  
+- Backend  
   Python 3.12, Fast API
-- Frondend
+- Frondend  
   Angular, Typescript
-- Testing
+- Testing  
   * backend
     Unit and integration testing is done with pytest
   * frontend
