@@ -12,7 +12,8 @@ class BooksDTL:
         raw_books = await self._mongo_session.find("books", limit=limit)
         return [self._parse_book(book) for book in raw_books]
 
-    def _parse_book(self, book: dict[str, str | list[str] | None]) -> Book:
+    @staticmethod
+    def _parse_book(book: dict[str, str | list[str] | None]) -> Book:
         return Book(
             id=str(book["_id"]),
             title=book["Title"],

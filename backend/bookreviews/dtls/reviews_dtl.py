@@ -18,7 +18,8 @@ class ReviewsDTL:
                                                      limit=limit)
         return [self._parse_review(review) for review in raw_reviews]
 
-    def _parse_review(self, review: dict) -> Review:
+    @staticmethod
+    def _parse_review(review: dict) -> Review:
         return Review(
             id=str(review["_id"]),
             book_id=str(review["bookID"]),
