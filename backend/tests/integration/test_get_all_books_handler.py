@@ -1,7 +1,6 @@
 from unittest.mock import create_autospec
 
 import pytest
-from fastapi import APIRouter
 from fastapi.testclient import TestClient
 
 from bookreviews.connections.mongosession import MongoSession
@@ -23,7 +22,7 @@ def handler(stub_config: Configuration, raw_book: RawBook) -> GetAllBooksHandler
     return GetAllBooksHandler(controller, stub_config)
 
 
-def test_read_main(client: TestClient, book: Book):
+def test_get_all_books_handler(client: TestClient, book: Book) -> None:
     response = client.get("/book", params={"limit": 99})
     assert response.status_code == 200
     assert response.json() == [book.model_dump()]

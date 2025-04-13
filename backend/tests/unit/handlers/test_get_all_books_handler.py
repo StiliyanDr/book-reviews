@@ -10,10 +10,8 @@ from bookreviews.models.book import Book
 
 
 class TestGetAllBooksHandler:
-    def test_method(self) -> None:
+    def test_constants(self) -> None:
         assert GetAllBooksHandler.METHOD == HTTPMethods.GET
-
-    def test_path(self) -> None:
         assert GetAllBooksHandler.PATH == "/book"
 
     @pytest.mark.asyncio
@@ -35,6 +33,5 @@ class TestGetAllBooksHandler:
 
         result = await handler()
 
-        assert isinstance(result, list)
         assert result == [book]
         controller.get_all.assert_called_with(limit=stub_config.books_limit)
