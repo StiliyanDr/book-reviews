@@ -10,11 +10,10 @@ from bookreviews.models.review import Review
 
 class TestGetAllByBookID:
     @pytest.mark.asyncio
-    async def test_exceptions_propagate(self) -> None:
+    async def test_exceptions_propagate(self, book_id: str) -> None:
         session = create_autospec(MongoSession)
         dtl = ReviewsDTL(session)
         session.find.side_effect = RuntimeError("Error!")
-        book_id = "67faa529c0bbeb5c0d143467"
 
         with pytest.raises(RuntimeError):
             await dtl.get_all_by_book_id(book_id)
@@ -22,11 +21,10 @@ class TestGetAllByBookID:
         session.find.assert_called_with("reviews", {"bookID": ObjectId(book_id)}, limit=None)
 
     @pytest.mark.asyncio
-    async def test_review_objects_are_returned(self, raw_review: dict, review: Review) -> None:
+    async def test_review_objects_are_returned(self, raw_review: dict, review: Review, book_id: str) -> None:
         session = create_autospec(MongoSession)
         dtl = ReviewsDTL(session)
         session.find.return_value = [raw_review]
-        book_id = "67faa529c0bbeb5c0d143467"
         result = await dtl.get_all_by_book_id(book_id)
 
         assert result == [review]

@@ -71,3 +71,8 @@ def review(raw_review: dict) -> Review:
                   time=raw_review["time"],
                   summary=raw_review["summary"],
                   text=raw_review["text"])
+
+
+@pytest.fixture
+def book_id() -> str:
+    return "67faa529c0bbeb5c0d143467"
