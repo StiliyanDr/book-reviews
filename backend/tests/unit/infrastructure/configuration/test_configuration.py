@@ -1,6 +1,6 @@
 from unittest.mock import patch, MagicMock
 
-from bookreviews.constants import Landcape
+from bookreviews.constants import Landscape
 from bookreviews.inftrastructure.configuration.configuration import Configuration
 from bookreviews.inftrastructure.configuration.mongoconfig import MongoConfig
 
@@ -9,8 +9,9 @@ def test_configuration(stub_config: Configuration) -> None:
     assert isinstance(stub_config.mongo, MongoConfig)
     assert stub_config.secrets_directory == "/secrets"
     assert stub_config.books_limit == 100
+    assert stub_config.reviews_limit == 100
     assert stub_config.port == 8080
-    assert stub_config.landscape == Landcape.QA
+    assert stub_config.landscape == Landscape.QA
 
 
 @patch.object(Configuration, "_read_secret", return_value=None)

@@ -3,6 +3,11 @@ from bookreviews.inftrastructure.configuration.configuration import Configuratio
 
 def create_stub_config() -> Configuration:
     return Configuration({
+        "secrets_directory": "/secrets",
+        "books_limit": 100,
+        "reviews_limit": 100,
+        "port": 8080,
+        "landscape": "qa",
         "mongo": {
             "protocol": "mongodb+srv",
             "host": "localhost:27017",
@@ -15,9 +20,5 @@ def create_stub_config() -> Configuration:
                 "username": "testuser",
                 "password": "testpass",
             },
-            "secrets_directory": "/secrets",
-            "books_limit": 100,
-            "port": 8080,
-            "landscape": "qa",
-        }
+        },
     })

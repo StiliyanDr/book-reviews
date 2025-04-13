@@ -69,3 +69,7 @@ class Configuration:
     @property
     def landscape(self) -> str:
         return self.__content["landscape"]
+
+    @property
+    def reviews_limit(self) -> Optional[int]:
+        return self.__content.get("reviews_limit")
