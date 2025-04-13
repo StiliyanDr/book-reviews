@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 class Review(BaseModel):
     id: str
+    book_id: str
     title: str
     profile_name: Optional[str]
     helpfulness: Optional[str]

@@ -21,6 +21,7 @@ class ReviewsDTL:
     def _parse_review(self, review: dict) -> Review:
         return Review(
             id=str(review["_id"]),
+            book_id=str(review["bookID"]),
             title=review["Title"],
             profile_name=review["profileName"],
             helpfulness=review["helpfulness"],

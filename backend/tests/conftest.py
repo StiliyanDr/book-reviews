@@ -49,11 +49,12 @@ def book(raw_book: RawBook) -> Book:
 def raw_review() -> dict:
     return {
         "_id": "67faa59180bbeb5c0d143467",
+        "bookID": "67faa529c0bbeb5c0d143467",
         "Title": "The Catcher in the Rye",
         "profileName": "John Doe",
         "helpfulness": "10/10",
         "score": 4.5,
-        "time": 1672531213,
+        "time": dt.datetime(2024, 11, 21, 11, 21, 31),
         "summary": "A great book",
         "text": "A book about a boy",
     }
@@ -62,10 +63,11 @@ def raw_review() -> dict:
 @pytest.fixture
 def review(raw_review: dict) -> Review:
     return Review(id=raw_review["_id"],
+                  book_id=raw_review["bookID"],
                   title=raw_review["Title"],
                   profile_name=raw_review["profileName"],
                   helpfulness=raw_review["helpfulness"],
                   score=raw_review["score"],
-                  time=dt.datetime.fromtimestamp(raw_review["time"], dt.UTC),
+                  time=raw_review["time"],
                   summary=raw_review["summary"],
                   text=raw_review["text"])
