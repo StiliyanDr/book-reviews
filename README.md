@@ -7,7 +7,7 @@ A web application displaying books and their reviews on Amazon
 - Backend  
   Python 3.12, Fast API
 - Frondend  
-  Angular, Typescript
+  Angular 19, Typescript
 - Testing  
   * backend  
     Unit and integration testing is done with pytest
