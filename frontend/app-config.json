@@ -1,0 +1,5 @@
+{
+    "environment": "dev",
+    "backendURL": "http://localhost:4200",
+    "apiPrefix": "/book-reviews/api"
+}
