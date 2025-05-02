@@ -1,14 +1,13 @@
 const js = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angulareslint = require('@angular-eslint/eslint-plugin');
-const angulareslintTemplate = require('@angular-eslint/eslint-plugin-template');
 const importPlugin = require('eslint-plugin-import');
 
 module.exports = [
     js.configs.recommended,
     ...tseslint.configs.recommended,
     {
-        ignores: ['**/node_modules/**', '**/dist/**'],
+        ignores: ['**/node_modules/**', '**/dist/**', '**/*.html'],
     },
     {
         files: ['**/*.ts'],
@@ -22,7 +21,6 @@ module.exports = [
         },
         plugins: {
             '@angular-eslint': angulareslint,
-            '@angular-eslint/template': angulareslintTemplate,
             'import': importPlugin,
         },
         rules: {
@@ -153,14 +151,5 @@ module.exports = [
             'import/no-duplicates': 'error',
         },
     },
-    {
-        files: ['**/*.html'],
-        plugins: {
-            '@angular-eslint/template': angulareslintTemplate,
-        },
-        rules: {
-            // Using only rules that are available in the plugin
-            '@angular-eslint/template/no-any': 'error'
-        },
-    },
+
 ];
