@@ -3,3 +3,5 @@ venv/
 .venv/
 .idea/
 data/archive.zip
+node_modules/
+.angular/
