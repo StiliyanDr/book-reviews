@@ -45,14 +45,7 @@ module.exports = [
             '@typescript-eslint/explicit-member-accessibility': ['off'],
             '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: false }],
             '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-            '@typescript-eslint/typedef': ['error', {
-                arrowParameter: false,
-                memberVariableDeclaration: true,
-                parameter: true,
-                propertyDeclaration: true,
-                variableDeclaration: true,
-                variableDeclarationIgnoreFunction: false,
-            }],
+            '@typescript-eslint/typedef': ['off'],
 
             // General rules
             'no-console': ['warn'],
