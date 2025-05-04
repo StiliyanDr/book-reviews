@@ -37,7 +37,8 @@ mat-toolbar {
     justify-content: left;
     gap: 1rem;
 
-    .apply-filters-button {
+    .apply-filters-button,
+    .view-details-button {
         width: 7rem;
     }
 }
