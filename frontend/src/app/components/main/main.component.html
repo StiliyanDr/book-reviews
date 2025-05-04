@@ -2,6 +2,8 @@
     <span>{{ title }}</span>
 </mat-toolbar>
 
+<mat-divider></mat-divider>
+
 <mat-sidenav-container class="main-container">
     <mat-sidenav [mode]="'side'"
                  [opened]="areFiltersOpened"
@@ -12,11 +14,12 @@
     <mat-sidenav-content class="main-content">
         <div class="filter-buttons">
             <button mat-mini-fab
-                    (click)="areFiltersOpened = !areFiltersOpened">
+                    (click)="onToggleFilters()">
                 <mat-icon>menu</mat-icon>
             </button>
             <button mat-mini-fab
-                    class="apply-filters-button">
+                    class="apply-filters-button"
+                    (click)="onApplyFilters()">
                 Apply Filters
             </button>
         </div>
