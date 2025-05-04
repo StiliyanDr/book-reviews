@@ -11,13 +11,15 @@
                     "skipTests": false,
                     "flat": false,
                     "inlineStyle": false,
-                    "inlineTemplate": false
+                    "inlineTemplate": false,
+                    "standalone": true
                 },
                 "@schematics/angular:class": {
                     "skipTests": false
                 },
                 "@schematics/angular:directive": {
-                    "skipTests": false
+                    "skipTests": false,
+                    "standalone": true
                 },
                 "@schematics/angular:guard": {
                     "skipTests": false
@@ -26,7 +28,8 @@
                     "skipTests": false
                 },
                 "@schematics/angular:pipe": {
-                    "skipTests": false
+                    "skipTests": false,
+                    "standalone": true
                 },
                 "@schematics/angular:service": {
                     "skipTests": false
