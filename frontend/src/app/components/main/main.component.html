@@ -1,1 +1,24 @@
-<header> {{ title }} </header>
+<mat-toolbar class="toolbar">
+    <span>{{ title }}</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="main-container">
+    <mat-sidenav [mode]="'side'"
+                 [opened]="areFiltersOpened"
+                 class="filters">
+        <span>Filters</span>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-content">
+        <div class="filter-buttons">
+            <button mat-mini-fab
+                    (click)="areFiltersOpened = !areFiltersOpened">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <button mat-mini-fab
+                    class="apply-filters-button">
+                Apply Filters
+            </button>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
