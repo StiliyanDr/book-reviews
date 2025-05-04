@@ -1,76 +1,76 @@
 {
-  "jasmine-test-explorer.configPath": "karma.conf.js",
-  "jasmine-test-explorer.projectPath": ".",
-  "jasmine-test-explorer.debuggerConfig": "ng test",
-  "jasmine-test-explorer.karmaConfFilePath": "karma.conf.js",
-  "jasmine-test-explorer.karmaConfigFilePath": "karma.conf.js",
-  "jasmine-test-explorer.nodeBinPath": "${workspaceFolder}/node_modules/.bin",
-  "testExplorer.useNativeTesting": true,
-  "jestrunner.configPath": "karma.conf.js",
-  "jestrunner.jestCommand": "ng test",
-  "jestrunner.runOptions": [
-    "--no-watch"
-  ],
-  // ESLint settings
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "html"
-  ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "eslint.format.enable": true,
-  "eslint.lintTask.enable": true,
-  "eslint.run": "onType",
-  "eslint.debug": true,
-  "eslint.alwaysShowStatus": true,
-  "eslint.options": {
-    "overrideConfigFile": "eslint.config.js"
-  },
-  "eslint.probe": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "html",
-    "vue",
-    "markdown"
-  ],
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "typescript.validate.enable": true,
-  "javascript.validate.enable": true,
-  // Make sure VS Code uses ESLint for validation
-  "editor.formatOnSave": true,
-  "editor.tabSize": 4,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  // Language specific settings
-  "[typescript]": {
+    "jasmine-test-explorer.configPath": "karma.conf.js",
+    "jasmine-test-explorer.projectPath": ".",
+    "jasmine-test-explorer.debuggerConfig": "ng test",
+    "jasmine-test-explorer.karmaConfFilePath": "karma.conf.js",
+    "jasmine-test-explorer.karmaConfigFilePath": "karma.conf.js",
+    "jasmine-test-explorer.nodeBinPath": "${workspaceFolder}/node_modules/.bin",
+    "testExplorer.useNativeTesting": true,
+    "jestrunner.configPath": "karma.conf.js",
+    "jestrunner.jestCommand": "ng test",
+    "jestrunner.runOptions": [
+        "--no-watch"
+    ],
+    // ESLint settings
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "html"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.run": "onType",
+    "eslint.debug": true,
+    "eslint.alwaysShowStatus": true,
+    "eslint.options": {
+        "overrideConfigFile": "eslint.config.js"
+    },
+    "eslint.probe": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "vue",
+        "markdown"
+    ],
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "typescript.validate.enable": true,
+    "javascript.validate.enable": true,
+    // Make sure VS Code uses ESLint for validation
     "editor.formatOnSave": true,
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
+    // Language specific settings
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        }
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        }
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features",
+        "editor.formatOnSave": false,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
     }
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    }
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false
-  }
 }

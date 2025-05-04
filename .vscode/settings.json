@@ -19,5 +19,12 @@
     "editor.detectIndentation": false,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features",
+        "editor.formatOnSave": false,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
     }
 }
