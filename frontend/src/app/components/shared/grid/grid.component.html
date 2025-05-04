@@ -1,0 +1,8 @@
+<ag-grid-angular [rowData]="rows"
+                 [columnDefs]="columnDefinitions"
+                 [autoSizeStrategy]="{
+                    type: 'fitCellContents',
+                 }"
+                 [rowSelection]="'single'"
+                 (rowSelected)="onRowSelected($event)">
+</ag-grid-angular>
