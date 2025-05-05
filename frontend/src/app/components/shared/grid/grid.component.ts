@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 import { AgGridAngular } from 'ag-grid-angular';
 import { AllCommunityModule, ModuleRegistry, ColDef, RowSelectedEvent } from 'ag-grid-community';
@@ -20,7 +20,9 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 export class GridComponent<Row> implements OnInit {
     @Input() rows: Row[] = [];
     @Input() columns: GridColumn<Row>[] = [];
-    @Output() rowClicked = new EventEmitter<Row>();
+    @Output() rowSelected = new EventEmitter<Row>();
+
+    @ViewChild('grid') grid?: AgGridAngular;
 
     columnDefinitions: ColDef[] = [];
 
@@ -32,6 +34,6 @@ export class GridComponent<Row> implements OnInit {
     }
 
     onRowSelected(event: RowSelectedEvent<Row>): void {
-        this.rowClicked.emit(event.data);
+        this.rowSelected.emit(event.data);
     }
 }
