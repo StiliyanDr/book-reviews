@@ -1,4 +1,4 @@
-export const PROXY_CONFIG = {
+const PROXY_CONFIG = {
     '/book-reviews/api': {
         target: 'http://localhost:8080',
         secure: false,
@@ -9,3 +9,5 @@ export const PROXY_CONFIG = {
         },
     },
 };
+
+module.exports = PROXY_CONFIG;
