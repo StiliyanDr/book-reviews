@@ -30,7 +30,7 @@ mat-toolbar {
     padding-left: 1rem;
 }
 
-.filter-buttons {
+.buttons {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,4 +41,10 @@ mat-toolbar {
     .view-details-button {
         width: 7rem;
     }
+}
+
+app-books-grid {
+    height: 100%;
+    width: 100%;
+    padding-top: 1rem;
 }
