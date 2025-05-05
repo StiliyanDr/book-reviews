@@ -143,7 +143,8 @@ def parse_list_value(list_value: str | None) -> list[str] | None:
         quoting=csv.QUOTE_MINIMAL,
     )
 
-    return next(csv_reader)
+    return [item.strip(f' "{LIST_VALUE_ENDS_CHAR}')
+            for item in next(csv_reader)]
 
 
 def init_db_with(books: list[DataRecord],
