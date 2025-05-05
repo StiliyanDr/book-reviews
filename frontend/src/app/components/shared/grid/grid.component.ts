@@ -20,6 +20,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 export class GridComponent<Row> implements OnInit {
     @Input() rows: Row[] = [];
     @Input() columns: GridColumn<Row>[] = [];
+    @Input() isLoading: boolean = false;
     @Output() rowSelected = new EventEmitter<Row>();
 
     @ViewChild('grid') grid?: AgGridAngular;
