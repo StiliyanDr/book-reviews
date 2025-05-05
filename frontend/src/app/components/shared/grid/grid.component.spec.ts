@@ -14,6 +14,9 @@ interface TestRow {
     numberAttribute: number;
 }
 
+const stringValueFormatter = <T>(params: { value: T }): string =>
+    (params.value as string).toUpperCase();
+
 @Component({
     selector: 'app-test-grid',
     standalone: true,
@@ -22,8 +25,15 @@ interface TestRow {
 })
 class TestGridComponent extends GridComponent<TestRow> {
     override columns: GridColumn<TestRow>[] = [
-        { displayName: 'String Attribute', rowProperty: 'stringAttribute' },
-        { displayName: 'Number Attribute', rowProperty: 'numberAttribute' },
+        {
+            displayName: 'String Attribute',
+            rowProperty: 'stringAttribute',
+            formatter: stringValueFormatter,
+        },
+        {
+            displayName: 'Number Attribute',
+            rowProperty: 'numberAttribute',
+        },
     ];
 }
 
@@ -61,8 +71,16 @@ describe('GridComponent', () => {
 
     it('it has the correct column definitions', () => {
         expect(component.columnDefinitions).toEqual([
-            { field: 'stringAttribute', headerName: 'String Attribute' },
-            { field: 'numberAttribute', headerName: 'Number Attribute' },
+            {
+                field: 'stringAttribute',
+                headerName: 'String Attribute',
+                valueFormatter: stringValueFormatter,
+            },
+            {
+                field: 'numberAttribute',
+                headerName: 'Number Attribute',
+                valueFormatter: GridComponent.toCommaSeparatedListIfArray,
+            },
         ]);
     });
 
@@ -93,6 +111,20 @@ describe('GridComponent', () => {
             it('it emits the row', () => {
                 expect(emitSpy).toHaveBeenCalledOnceWith(selectedRow);
             });
+        });
+    });
+
+    describe('toCommaSeparatedListIfArray', () => {
+        it('it returns the value as is if it is not an array', () => {
+            expect(GridComponent.toCommaSeparatedListIfArray({ value: 'test' })).toEqual('test');
+        });
+
+        it('it joins string arrays with commas', () => {
+            expect(GridComponent.toCommaSeparatedListIfArray({ value: ['one', 'two', 'three'] })).toEqual('one, two, three');
+        });
+
+        it('it joins non-string arrays with commas', () => {
+            expect(GridComponent.toCommaSeparatedListIfArray({ value: [1, 2, 3] })).toEqual('1, 2, 3');
         });
     });
 });

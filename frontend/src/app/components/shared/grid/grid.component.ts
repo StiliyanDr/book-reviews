@@ -18,6 +18,11 @@ ModuleRegistry.registerModules([AllCommunityModule]);
     styleUrl: './grid.component.scss'
 })
 export class GridComponent<Row> implements OnInit {
+    static toCommaSeparatedListIfArray<T>(params: { value: T }): string {
+        return Array.isArray(params.value) ?
+            params.value.join(', ') : String(params.value);
+    }
+
     @Input() rows: Row[] = [];
     @Input() columns: GridColumn<Row>[] = [];
     @Input() isLoading: boolean = false;
@@ -31,6 +36,7 @@ export class GridComponent<Row> implements OnInit {
         this.columnDefinitions = this.columns.map(column => ({
             field: column.rowProperty.toString(),
             headerName: column.displayName,
+            valueFormatter: column.formatter ?? GridComponent.toCommaSeparatedListIfArray,
         }));
     }
 

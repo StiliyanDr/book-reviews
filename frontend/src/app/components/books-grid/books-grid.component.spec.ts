@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BooksGridComponent } from './books-grid.component';
+import { GridComponent } from '../shared/grid/grid.component';
 
 describe('BooksGridComponent', () => {
     let component: BooksGridComponent;
@@ -23,11 +24,11 @@ describe('BooksGridComponent', () => {
 
     it('it should have the correct column definitions', () => {
         expect(component.columnDefinitions).toEqual([
-            { headerName: 'Title', field: 'title' },
-            { headerName: 'Authors', field: 'authors' },
-            { headerName: 'Published Date', field: 'publishedDate' },
-            { headerName: 'Categories', field: 'categories' },
-            { headerName: 'Description', field: 'description' },
+            { headerName: 'Title', field: 'title', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
+            { headerName: 'Authors', field: 'authors', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
+            { headerName: 'Published Date', field: 'publishedDate', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
+            { headerName: 'Categories', field: 'categories', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
+            { headerName: 'Description', field: 'description', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
         ]);
     });
 });
