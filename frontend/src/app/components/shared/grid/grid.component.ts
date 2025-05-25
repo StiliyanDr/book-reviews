@@ -46,6 +46,8 @@ export class GridComponent<Row> implements OnInit {
     }
 
     onRowSelected(event: RowSelectedEvent<Row>): void {
-        this.rowSelected.emit(event.data);
+        if (event.node.isSelected()) {
+            this.rowSelected.emit(event.data);
+        }
     }
 }
