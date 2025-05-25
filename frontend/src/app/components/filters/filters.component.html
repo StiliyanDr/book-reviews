@@ -1,0 +1,39 @@
+<span class="title">Filters</span>
+
+<div class="filter">
+    <mat-label>Title</mat-label>
+    <input matInput
+           [placeholder]="'Enter a title...'"
+           [value]="title"
+           (change)="onTitleChange($event)"
+    >
+</div>
+
+<div class="filter">
+    <mat-label>Categories</mat-label>
+    <mat-select multiple 
+                [placeholder]="'Select categories...'"
+                [value]="categories"
+                (valueChange)="onCategoryChange($event)">
+      @for (category of allCategories; track category) {
+        <mat-option [value]="category">{{ category }}</mat-option>
+      }
+    </mat-select>
+</div>
+
+<div class="filter">
+    <mat-label>Author</mat-label>
+    <input matInput
+            [placeholder]="'Enter author name...'"
+            [value]="authorName"
+            (change)="onAuthorChange($event)"
+    >
+</div>
+
+<app-integer-input
+    class="filter"
+    [label]="'Published Year'"
+    [placeholder]="'Enter year...'"
+    [value]="publishedYear"
+    (valueChange)="onPublishedYearChange($event)"
+></app-integer-input>
