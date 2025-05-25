@@ -105,11 +105,25 @@ describe('GridComponent', () => {
 
             beforeEach(() => {
                 emitSpy = spyOn(component.rowSelected, 'emit');
-                component.onRowSelected({ data: selectedRow } as RowSelectedEvent<TestRow>);
+                component.onRowSelected({ data: selectedRow, node: { isSelected: () => true } } as RowSelectedEvent<TestRow>);
             });
 
             it('it emits the row', () => {
                 expect(emitSpy).toHaveBeenCalledOnceWith(selectedRow);
+            });
+        });
+
+        describe('when a row is deselected', () => {
+            let emitSpy: jasmine.Spy;
+            const selectedRow = rows[0];
+
+            beforeEach(() => {
+                emitSpy = spyOn(component.rowSelected, 'emit');
+                component.onRowSelected({ data: selectedRow, node: { isSelected: () => false } } as RowSelectedEvent<TestRow>);
+            });
+
+            it('it doesn\'t emit the row', () => {
+                expect(emitSpy).not.toHaveBeenCalled();
             });
         });
     });
