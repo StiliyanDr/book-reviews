@@ -12,6 +12,7 @@ import { Book } from '../../models/book.model';
 import { BooksService } from '../../services/books.service';
 import { BookDetailsDialogComponent } from '../book-details-dialog/book-details-dialog.component';
 import { BooksGridComponent } from '../books-grid/books-grid.component';
+import { FiltersComponent } from '../filters/filters.component';
 
 @Component({
     selector: 'app-main',
@@ -23,6 +24,7 @@ import { BooksGridComponent } from '../books-grid/books-grid.component';
         MatButtonModule,
         MatDividerModule,
         BooksGridComponent,
+        FiltersComponent,
     ],
     templateUrl: './main.component.html',
     styleUrl: './main.component.scss'
