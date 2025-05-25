@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Book Details</h2>
+
+<mat-dialog-content>
+    <div class="image">
+        @if (book.imageURL != null) {
+            <img [src]="book.imageURL" />
+        } @else {
+            <span>No image is available.</span>
+        }
+    </div>
+
+    <app-book-detail label="Title" [text]="book.title"></app-book-detail>
+    <app-book-detail label="Authors" [text]="book.authors.join(', ')"></app-book-detail>
+    <app-book-detail label="Categories" [text]="book.categories.join(', ')"></app-book-detail>
+    <app-book-detail label="Description" [text]="book.description ?? 'None available'"></app-book-detail>
+    <app-book-detail label="Published Date" [text]="book.publishedDate ?? 'Unknown'"></app-book-detail>
+    <app-book-detail label="Total Ratings" [text]="(book.ratingsCount ?? 0).toString()"></app-book-detail>
+
+    @if (book.publisher != null) {
+        <app-book-detail label="Publisher" [text]="book.publisher"></app-book-detail>
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onClose()">Close</button>
+</mat-dialog-actions>
