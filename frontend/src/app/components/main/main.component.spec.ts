@@ -1,5 +1,6 @@
 import { DestroyRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Subject } from 'rxjs';
 
@@ -15,12 +16,16 @@ describe('MainComponent', () => {
     let booksSubject: Subject<Book[]>;
     let booksService: jasmine.SpyObj<BooksService>;
     let destroyRef: jasmine.SpyObj<DestroyRef>;
+    let matDialog: jasmine.SpyObj<MatDialog>;
+
+    const books = defaultBooks();
 
     beforeEach(async () => {
         booksSubject = new Subject<Book[]>();
         booksService = jasmine.createSpyObj<BooksService>({
             getAllBooks: booksSubject.asObservable(),
         });
+        matDialog = jasmine.createSpyObj<MatDialog>(['open']);
         destroyRef = jasmine.createSpyObj<DestroyRef>(['onDestroy']);
 
         await TestBed.configureTestingModule({
@@ -33,6 +38,10 @@ describe('MainComponent', () => {
                 {
                     provide: DestroyRef,
                     useValue: destroyRef,
+                },
+                {
+                    provide: MatDialog,
+                    useValue: matDialog,
                 },
             ],
         }).compileComponents();
@@ -65,8 +74,6 @@ describe('MainComponent', () => {
         });
 
         describe('and the books arrive', () => {
-            const books = defaultBooks();
-
             beforeEach(() => {
                 booksSubject.next(books);
                 booksSubject.complete();
@@ -93,6 +100,60 @@ describe('MainComponent', () => {
                 it('it reloads the books', () => {
                     expect(booksService.getAllBooks).toHaveBeenCalledTimes(2);
                 });
+            });
+        });
+    });
+
+    describe('selecting a book', () => {
+        beforeEach(() => {
+            booksSubject.next(books);
+            booksSubject.complete();
+            fixture.detectChanges();
+        });
+
+        it('it has no selection by default', () => {
+            expect(component.selectedBook).toBeNull();
+        });
+
+        describe('when a book is selected', () => {
+            const book = books[0];
+
+            beforeEach(() => {
+                component.onBookSelected(book);
+            });
+
+            it('it sets the selected book', () => {
+                expect(component.selectedBook).toEqual(book);
+            });
+        });
+    });
+
+    describe('opening the book details dialog', () => {
+        beforeEach(() => {
+            booksSubject.next(books);
+            booksSubject.complete();
+            fixture.detectChanges();
+        });
+
+        describe('when no book is selected', () => {
+            beforeEach(() => {
+                component.selectedBook = null;
+                component.openBookDetailsDialog();
+            });
+
+            it('it does nothing', () => {
+                expect(matDialog.open).not.toHaveBeenCalled();
+            });
+        });
+
+        describe('when a book is selected', () => {
+            beforeEach(() => {
+                component.selectedBook = books[0];
+                component.openBookDetailsDialog();
+            });
+
+            it('it opens the dialog', () => {
+                expect(matDialog.open).toHaveBeenCalled();
             });
         });
     });

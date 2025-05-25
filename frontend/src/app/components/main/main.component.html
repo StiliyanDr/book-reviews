@@ -23,7 +23,10 @@
                 Apply Filters
             </button>
             <button mat-mini-fab
-                    class="view-details-button">
+                    class="view-details-button"
+                    [disabled]="selectedBook == null"
+                    (click)="openBookDetailsDialog()"
+            >
                 View Details
             </button>
             <button mat-mini-fab>
@@ -33,6 +36,7 @@
         <app-books-grid
             [rows]="books"
             [isLoading]="isLoadingBooks"
+            (rowSelected)="onBookSelected($event)"
         ></app-books-grid>
     </mat-sidenav-content>
 </mat-sidenav-container>

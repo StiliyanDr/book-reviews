@@ -1,5 +1,6 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -9,6 +10,7 @@ import { finalize } from 'rxjs';
 
 import { Book } from '../../models/book.model';
 import { BooksService } from '../../services/books.service';
+import { BookDetailsDialogComponent } from '../book-details-dialog/book-details-dialog.component';
 import { BooksGridComponent } from '../books-grid/books-grid.component';
 
 @Component({
@@ -20,7 +22,7 @@ import { BooksGridComponent } from '../books-grid/books-grid.component';
         MatIconModule,
         MatButtonModule,
         MatDividerModule,
-        BooksGridComponent
+        BooksGridComponent,
     ],
     templateUrl: './main.component.html',
     styleUrl: './main.component.scss'
@@ -30,10 +32,12 @@ export class MainComponent implements OnInit {
     areFiltersOpened: boolean = false;
     books: Book[] = [];
     isLoadingBooks: boolean = false;
+    selectedBook: Book | null = null;
 
     constructor(
         private readonly booksService: BooksService,
         private readonly destroyRef: DestroyRef,
+        private readonly dialog: MatDialog,
     ) {
     }
 
@@ -58,5 +62,17 @@ export class MainComponent implements OnInit {
     onApplyFilters(): void {
         this.areFiltersOpened = false;
         this.loadBooks();
+    }
+
+    onBookSelected(book: Book): void {
+        this.selectedBook = book;
+    }
+
+    openBookDetailsDialog(): void {
+        if (this.selectedBook !== null) {
+            this.dialog.open(BookDetailsDialogComponent, {
+                data: this.selectedBook,
+            });
+        }
     }
 }
