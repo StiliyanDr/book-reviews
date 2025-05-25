@@ -60,7 +60,6 @@ export class MainComponent implements OnInit {
     }
 
     onApplyFilters(): void {
-        this.areFiltersOpened = false;
         this.loadBooks();
     }
 

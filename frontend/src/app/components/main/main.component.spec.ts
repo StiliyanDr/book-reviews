@@ -93,10 +93,6 @@ describe('MainComponent', () => {
                     fixture.detectChanges();
                 });
 
-                it('it closes the filters', () => {
-                    expect(component.areFiltersOpened).toBeFalse();
-                });
-
                 it('it reloads the books', () => {
                     expect(booksService.getAllBooks).toHaveBeenCalledTimes(2);
                 });
