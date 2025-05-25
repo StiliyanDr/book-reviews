@@ -1,0 +1,14 @@
+<mat-label>{{ label }}</mat-label>
+
+<input matInput
+       type="text"
+       [placeholder]="placeholder"
+       [value]="value !== null ? value : ''"
+       (input)="onValueChange($event)"
+>
+
+@if (!isValid) {
+    <div class="error-message">
+        Value must be an integer!
+    </div>
+}
