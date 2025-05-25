@@ -24,11 +24,11 @@ describe('BooksGridComponent', () => {
 
     it('it should have the correct column definitions', () => {
         expect(component.columnDefinitions).toEqual([
-            { headerName: 'Title', field: 'title', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
-            { headerName: 'Authors', field: 'authors', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
-            { headerName: 'Published Date', field: 'publishedDate', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
-            { headerName: 'Categories', field: 'categories', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
-            { headerName: 'Description', field: 'description', valueFormatter: GridComponent.toCommaSeparatedListIfArray },
+            { headerName: 'Title', field: 'title', valueFormatter: GridComponent.defaultFormatter },
+            { headerName: 'Authors', field: 'authors', valueFormatter: GridComponent.defaultFormatter },
+            { headerName: 'Published Date', field: 'publishedDate', valueFormatter: GridComponent.defaultFormatter },
+            { headerName: 'Categories', field: 'categories', valueFormatter: GridComponent.defaultFormatter },
+            { headerName: 'Description', field: 'description', valueFormatter: GridComponent.defaultFormatter },
         ]);
     });
 });

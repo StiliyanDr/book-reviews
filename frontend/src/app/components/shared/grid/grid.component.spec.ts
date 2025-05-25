@@ -79,7 +79,7 @@ describe('GridComponent', () => {
             {
                 field: 'numberAttribute',
                 headerName: 'Number Attribute',
-                valueFormatter: GridComponent.toCommaSeparatedListIfArray,
+                valueFormatter: GridComponent.defaultFormatter,
             },
         ]);
     });

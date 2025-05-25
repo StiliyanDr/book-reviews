@@ -23,6 +23,11 @@ export class GridComponent<Row> implements OnInit {
             params.value.join(', ') : String(params.value);
     }
 
+    static defaultFormatter<T>(params: { value: T }): string {
+        const result = params.value ?? '';
+        return GridComponent.toCommaSeparatedListIfArray({ value: result });
+    }
+
     @Input() rows: Row[] = [];
     @Input() columns: GridColumn<Row>[] = [];
     @Input() isLoading: boolean = false;
@@ -36,7 +41,7 @@ export class GridComponent<Row> implements OnInit {
         this.columnDefinitions = this.columns.map(column => ({
             field: column.rowProperty.toString(),
             headerName: column.displayName,
-            valueFormatter: column.formatter ?? GridComponent.toCommaSeparatedListIfArray,
+            valueFormatter: column.formatter ?? GridComponent.defaultFormatter,
         }));
     }
 
